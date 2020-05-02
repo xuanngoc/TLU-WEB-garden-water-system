@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Danh sách các giống cây</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.3.0/jquery.min.js"
+            th:src="@{/webjars/jquery/3.3.0/jquery.min.js}"></script>
+
+    <!--<link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>-->
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container">
+    <div th:if="${not #lists.isEmpty(plants)}">
+        <h2 class="text-center">Danh sách các giống cây 🌳</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Số thứ tự</th>
+                <th>Id</th>
+                <th>Tên giống cây</th>
+                <th>Điều kiện độ ẩm (%)</th>
+                <th>Điều kiện nhiệt độ (°C)</th>
+                <!--<th>Điều kiện độ pH</th>-->
+                <th>Diện tích trung bình(m²/cây)</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+            <tr th:each="plant, itor : ${plants}">
+                <td th:text="${itor.count}"></td>
+                <td th:text="${plant.id}"></td>
+                <td th:text="${plant.name}"></td>
+                <td th:text="${plant.minTemperature + ' - ' + plant.maxTemperature}"></td>
+                <td th:text="${plant.minHumidity + ' - ' + plant.maxHumidity}"></td>
+                <!--<td th:text="${plant.minPh + ' - ' + plant.maxPh}"></td>-->
+                <td th:text="${plant.area}"></td>
+
+                <!--<td><a th:href="${'/product/show/' + product.id}">View</a> </td>-->
+                <td><a th:href="${'/plant/edit/' + plant.id}">Edit</a> </td>
+                <td><a th:href="${'/plant/delete/' + plant.id}">Delete</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/plant/new">Thêm cây mới</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
