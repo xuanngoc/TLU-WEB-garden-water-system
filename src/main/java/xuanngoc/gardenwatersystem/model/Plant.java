@@ -1,5 +1,7 @@
 package xuanngoc.gardenwatersystem.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,10 +9,15 @@ public class Plant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     @Version
     private Integer version;
+
+    @OneToMany(
+            cascade = CascadeType.REMOVE
+    )
+    private List<Garden> gardens;
 
     private String name;
     private double maxHumidity;
@@ -21,12 +28,13 @@ public class Plant {
     private double minPh;*/
     private double area;
 
+
     public void setId(Integer id) {
-        this.Id = id;
+        this.id = id;
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public Integer getVersion() {

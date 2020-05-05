@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>New garden</title>
+
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+
+    <h2>Thêm mới khu vườn 🌳🌳🌳</h2>
+    <div>
+        <form class="form-horizontal" th:object="${garden}" th:action="@{/garden}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{version}"/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="exampleFormControlSelect1">Chọn loài cây trồng</label>
+                <select class="form-control col-sm-10" id="exampleFormControlSelect1" th:field="*{plant}">
+                    <option th:each="plant : ${plants}" th:value="${plant.id}" th:text="${plant.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Tên khu vườn:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{name}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Diện tích(m²)</label>
+                <div class="col-sm-10">
+                    <input type="number" step="0.01" class="form-control" th:field="*{area}"/>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

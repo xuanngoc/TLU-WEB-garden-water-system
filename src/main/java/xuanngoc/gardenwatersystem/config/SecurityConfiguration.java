@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
             .and()
             .formLogin()
-                .successForwardUrl("/")
+                .defaultSuccessUrl("/")
                 .permitAll();
             /*.and().
                 logout()
@@ -50,8 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    // TODO * Configuring this bean should not be needed once Spring Boot's Thymeleaf starter includes configuration
-    // TODO   for thymeleaf-extras-springsecurity5 (instead of thymeleaf-extras-springsecurity4)
+
     @Bean
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();

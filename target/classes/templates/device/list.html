@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Danh sách các thiết bị</title>
+
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+    <div th:if="${not #lists.isEmpty(devices)}">
+        <h2 class="text-center">Danh sách các thiết bị 🌳</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Số thứ tự</th>
+                <!--<th>Id</th>-->
+                <th>Loại thiết bị</th>
+                <th>Thuộc khu vườn</th>
+                <th>Tên thiết bị</th>
+                <th>Tình trạng</th>
+                <th>Đang bật</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+            <tr th:each="device, itor : ${devices}">
+                <td th:text="${itor.count}"></td>
+                <!--<td th:text="${garden.id}"></td>-->
+                <td th:text="${device.deviceType.name}"></td>
+                <td th:text="${device.garden.name}"></td>
+                <td th:text="${device.name}"></td>
+                <td th:text="${device.status}"></td>
+                <td th:text="${device.state}"></td>
+                <td><a th:href="${'/device/edit/' + device.id}">Edit</a></td>
+                <td><a th:href="${'/device/delete/' + device.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 btn bg-primary">
+            <a href="/device/new" class="text-light">Thêm thiết bị</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
