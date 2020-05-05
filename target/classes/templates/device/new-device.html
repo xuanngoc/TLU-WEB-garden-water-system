@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>New garden</title>
+
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+
+    <h2>Thêm mới thiết bị 🌳🌳🌳</h2>
+    <div>
+        <form class="form-horizontal" th:object="${device}" th:action="@{/device}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Tên</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{name}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="deviceType">Chọn loại thiết bị</label>
+                <select class="form-control col-sm-10" id="deviceType" th:field="*{deviceType}">
+                    <option th:each="deviceType : ${deviceTypes}" th:value="${deviceType.id}" th:text="${deviceType.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="garden">Thuộc về khu vườn</label>
+                <select class="form-control col-sm-10" id="garden" th:field="*{garden}">
+                    <option th:each="garden : ${gardens}" th:value="${garden.id}" th:text="${garden.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="status">Tình trạng</label>
+                <select class="form-control col-sm-10" id="status" th:field="*{status}">
+                    <option id="1" value="Hoạt động">Hoạt động</option>
+                    <option id="2" value="Không hoạt động">Không hoạt động</option>
+                    <option id="3" value="Đang sửa chữa">Đang sửa chữa</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="state">Đang bật</label>
+                <select class="form-control col-sm-10" id="state" th:field="*{state}">
+                    <option id="1" value="true">Bật</option>
+                    <option id="2" value="false">Tắt</option>
+                </select>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+</html>

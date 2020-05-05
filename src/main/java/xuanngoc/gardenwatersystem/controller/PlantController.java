@@ -21,7 +21,7 @@ public class PlantController {
 
     @RequestMapping("plant/list")
     public String listPlants(Model model) {
-        model.addAttribute("plants", plantService.listAll());
+        model.addAttribute("plants", plantService.getAllPlants());
         return "plant/list";
     }
 

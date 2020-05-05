@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Danh sách các loại thiết bị</title>
+
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+    <div th:if="${not #lists.isEmpty(deviceTypes)}">
+        <h2 class="text-center">Danh sách các loại thiết bị 🌳</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Số thứ tự</th>
+                <!--<th>Id</th>-->
+                <th>Tên loại thiết bị</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+            <tr th:each="deviceType, itor : ${deviceTypes}">
+                <td th:text="${itor.count}"></td>
+                <!--<td th:text="${garden.id}"></td>-->
+                <td th:text="${deviceType.name}"></td>
+                <td><a th:href="${'/device-type/edit/' + deviceType.id}">Edit</a></td>
+                <td><a th:href="${'/device-type/delete/' + deviceType.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 btn bg-primary">
+            <a href="/device-type/new" class="text-light">Thêm loại thiết bị mới</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package xuanngoc.gardenwatersystem.service;
+package xuanngoc.gardenwatersystem.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
