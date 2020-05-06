@@ -33,7 +33,7 @@ public class GardenController {
         return "garden/list";
     }
 
-    @RequestMapping("garden/{plantId}/list")
+    @RequestMapping("garden/list/{plantId}")
     public String listGardens(@PathVariable Integer plantId, Model model) {
         model.addAttribute("gardens", gardenService.findAllGardens(plantId));
         return "garden/list";

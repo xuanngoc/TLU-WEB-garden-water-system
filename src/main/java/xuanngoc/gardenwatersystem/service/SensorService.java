@@ -25,7 +25,7 @@ public class SensorService {
         return sensorRepository.findAll(Sort.by("id").ascending());
     }
 
-    public List<Sensor> findAllSensor(Integer sensorTypeId) {
+    public List<Sensor> findAllSensors(Integer sensorTypeId) {
         return sensorRepository.findBySensorTypeId(sensorTypeId);
     }
 

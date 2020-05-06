@@ -7,56 +7,39 @@
 <th:block th:fragment="header">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <img class="navbar-brand"   th:src="@{/img/logo.jpeg}" style="width: 100px;" />
-        <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        </div>
-        <!-- Navbar-->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="">Logout</a>
-                </div>
-            </li>
-        </ul>
+
     </nav>
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
+    <div id="layoutSidenav" >
+        <div id="layoutSidenav_nav" style="height: 95vh;">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Quản lý thiết bị</div>
-                        <a class="nav-link" th:href="${'/'}">
-                            Tổng hợp thiết bị
+                        <div class="sb-sidenav-menu-heading">Quản lý vườn</div>
+                        <a class="nav-link" th:href="@{'/garden/list'}">
+                            Tổng hợp các vườn
                         </a>
-                        <a class="nav-link" th:href="${'/'}">
-                            Hẹn giờ
+                    </div>
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Quản lý thiết bị</div>
+                        <a class="nav-link" th:href="@{'/device/list'}">
+                            Tổng hợp thiết bị
                         </a>
                     </div>
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Quản lý cảm biến</div>
-                        <a class="nav-link" th:href="${'/'}">
+                        <a class="nav-link" th:href="@{'/sensor/list'}">
                             Tổng hợp cảm biến
-                        </a>
-                        <a class="nav-link" th:href="${'/'}">
-                            Biểu đồ
                         </a>
                     </div>
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Quản lý giống cây</div>
-                        <a class="nav-link" th:href="${'/plant/list'}">
-                            Tổng hợp các giống cây
-                        </a>
-                        <a class="nav-link" th:href="${'/'}">
-                            xxxxxxxxxxxxxxxxxx
+                        <div class="sb-sidenav-menu-heading">Quản lý cây</div>
+                        <a class="nav-link" th:href="@{'/plant/list'}">
+                            Tổng hợp cây
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <p class="text-center">&copy; TI30h3</p>
+                <div class="sb-sidenav-footer text-center">
+                    <p>&copy; TI30h3</p>
                     <p>
                         <span sec:authorize="isAuthenticated()" style="display: inline-block;">
                             Logged user: <span sec:authentication="name"></span>

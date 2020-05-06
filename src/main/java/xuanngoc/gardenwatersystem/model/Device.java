@@ -15,6 +15,9 @@ public class Device {
     @ManyToOne
     private Garden garden;
 
+    @OneToOne
+    private Sensor sensor;
+
     private String name;
     private String status;
     private Boolean state;
