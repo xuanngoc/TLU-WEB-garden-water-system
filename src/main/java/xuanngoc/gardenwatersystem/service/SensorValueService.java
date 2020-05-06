@@ -9,7 +9,6 @@ import xuanngoc.gardenwatersystem.repository.SensorValueRepository;
 
 import javax.persistence.EntityNotFoundException;
 
-import static xuanngoc.gardenwatersystem.service.PlantWaterService.plantWater;
 
 @Service
 public class SensorValueService {
@@ -35,7 +34,8 @@ public class SensorValueService {
     }
 
     public SensorValue saveOrUpdate(SensorValue sensorValue) {
-        plantWater(sensorValue.getSensor(), sensorValue.getValue());
+        boolean stateDevice = PlantWaterService.plantWater(sensorValue.getSensor(), sensorValue.getValue());
+        sensorValue.getSensor().getDevice().setState(stateDevice);
         return sensorValueRepository.save(sensorValue);
     }
 

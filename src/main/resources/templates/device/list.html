@@ -14,9 +14,9 @@
             <tr>
                 <th>Số thứ tự</th>
                 <!--<th>Id</th>-->
+                <th>Tên thiết bị</th>
                 <th>Loại thiết bị</th>
                 <th>Thuộc khu vườn</th>
-                <th>Tên thiết bị</th>
                 <th>Tình trạng</th>
                 <th>Đang bật</th>
                 <th>Sửa</th>
@@ -25,9 +25,9 @@
             <tr th:each="device, itor : ${devices}">
                 <td th:text="${itor.count}"></td>
                 <!--<td th:text="${garden.id}"></td>-->
+                <td th:text="${device.name}"></td>
                 <td th:text="${device.deviceType.name}"></td>
                 <td th:text="${device.garden.name}"></td>
-                <td th:text="${device.name}"></td>
                 <td th:text="${device.status}"></td>
                 <td th:text="${device.state}"></td>
                 <td><a th:href="${'/device/edit/' + device.id}">Edit</a></td>

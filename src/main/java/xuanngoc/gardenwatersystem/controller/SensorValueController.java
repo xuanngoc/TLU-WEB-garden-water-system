@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xuanngoc.gardenwatersystem.model.Sensor;
 import xuanngoc.gardenwatersystem.model.SensorValue;
+import xuanngoc.gardenwatersystem.service.PlantWaterService;
 import xuanngoc.gardenwatersystem.service.SensorService;
 import xuanngoc.gardenwatersystem.service.SensorValueService;
 
@@ -35,8 +36,11 @@ public class SensorValueController {
     @PostMapping("/{id}/new")
     private SensorValue newSensorValue(@PathVariable Integer id, @RequestBody SensorValue sensorValue) {
         Sensor sensor = sensorService.getById(id);
-        sensorValue.setSensor(sensor);
-        return sensorValueService.saveOrUpdate(sensorValue);
+        if (PlantWaterService.isSensorWorking(sensor)) {
+            sensorValue.setSensor(sensor);
+            return sensorValueService.saveOrUpdate(sensorValue);
+        }
+        return null;
     }
 
 }

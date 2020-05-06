@@ -1,6 +1,7 @@
 package xuanngoc.gardenwatersystem.service;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -15,6 +16,11 @@ public class SensorService {
 
     private SensorRepository sensorRepository;
 
+    private static void accept(Sensor sensor) {
+        boolean statusDevice = PlantWaterService.checkStatusDevice(sensor.getDevice());
+        sensor.setState(statusDevice);
+    }
+
     @Autowired
     public void setSensorRepository(SensorRepository sensorRepository) {
         this.sensorRepository = sensorRepository;
@@ -22,7 +28,12 @@ public class SensorService {
 
 
     public List<Sensor> findAllSensors() {
-        return sensorRepository.findAll(Sort.by("id").ascending());
+        List<Sensor> sensors =  sensorRepository.findAll(Sort.by("id").ascending());
+        sensors.forEach(sensor -> {
+            boolean statusSensor = PlantWaterService.isSensorWorking(sensor);
+            sensor.setState(statusSensor);
+        });
+        return sensors;
     }
 
     public List<Sensor> findAllSensors(Integer sensorTypeId) {
@@ -35,6 +46,8 @@ public class SensorService {
     }
 
     public void saveOrUpdate(Sensor sensor) {
+        boolean statusSensor = PlantWaterService.isSensorWorking(sensor);
+        sensor.setState(statusSensor);
         sensorRepository.save(sensor);
     }
 

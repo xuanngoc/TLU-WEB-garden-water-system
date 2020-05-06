@@ -9,13 +9,13 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private DeviceType deviceType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Garden garden;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Sensor sensor;
 
     private String name;
@@ -68,5 +68,13 @@ public class Device {
 
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
 }

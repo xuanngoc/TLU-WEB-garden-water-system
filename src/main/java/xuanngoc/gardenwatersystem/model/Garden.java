@@ -1,5 +1,7 @@
 package xuanngoc.gardenwatersystem.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 @Entity
 public class Garden {
@@ -11,8 +13,11 @@ public class Garden {
     @Version
     private Integer version;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Plant plant;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Device> devices;
 
     private String name;
     private String area;

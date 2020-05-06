@@ -1,5 +1,7 @@
 package xuanngoc.gardenwatersystem.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,11 +11,14 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private SensorType sensorType;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Device device;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<SensorValue> sensorValue;
 
     private String name;
     private String status;
