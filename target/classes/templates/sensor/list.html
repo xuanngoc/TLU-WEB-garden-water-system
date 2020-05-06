@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Danh sách các cảm biến</title>
+
+    <!--<link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>-->
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+    <div th:if="${not #lists.isEmpty(sensors)}">
+        <h2 class="text-center">Danh sách cảm biến 🌳</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Số thứ tự</th>
+                <!--<th>Id</th>-->
+                <th>Tên cảm biến</th>
+                <th>Loại loại cảm biến</th>
+                <th>Thiết bị</th>
+                <th>Tình trạng</th>
+                <th>Đang bật</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+            <tr th:each="sensor, itor : ${sensors}">
+                <td th:text="${itor.count}"></td>
+                <!--<td th:text="${garden.id}"></td>-->
+                <td th:text="${sensor.name}"></td>
+                <td th:text="${sensor.sensorType.name}"></td>
+                <td th:text="${sensor.device.name}"></td>
+                <td th:text="${sensor.status}"></td>
+                <td th:text="${sensor.state}"></td>
+
+                <td><a th:href="${'/sensor/edit/' + sensor.id}">Edit</a></td>
+                <td><a th:href="${'/sensor/delete/' + sensor.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 btn bg-primary">
+            <a href="/sensor/new" class="text-light">Thêm cảm biến</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{fragments/layout}">
 <head>
-    <title>New garden</title>
+    <title>Edit device</title>
 
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
 
-    <h2>Thêm mới thiết bị 🌳🌳🌳</h2>
+    <h2>Sửa thông tin thiết bị 🌳🌳🌳</h2>
     <div>
         <form class="form-horizontal" th:object="${device}" th:action="@{/device}" method="post">
             <input type="hidden" th:field="*{id}"/>
@@ -39,13 +39,13 @@
                     <option id="3" value="Đang sửa chữa">Đang sửa chữa</option>
                 </select>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="col-sm-2 control-label" for="state">Đang bật</label>
                 <select class="form-control col-sm-10" id="state" th:field="*{state}">
                     <option id="1" value="true">Bật</option>
                     <option id="2" value="false">Tắt</option>
                 </select>
-            </div>
+            </div>-->
             <div class="row">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

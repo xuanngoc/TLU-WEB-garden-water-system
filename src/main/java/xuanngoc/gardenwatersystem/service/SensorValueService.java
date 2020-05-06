@@ -3,11 +3,15 @@ package xuanngoc.gardenwatersystem.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import xuanngoc.gardenwatersystem.model.SensorValue;
 import xuanngoc.gardenwatersystem.repository.SensorValueRepository;
 
 import javax.persistence.EntityNotFoundException;
 
+import static xuanngoc.gardenwatersystem.service.PlantWaterService.plantWater;
+
+@Service
 public class SensorValueService {
 
     private SensorValueRepository sensorValueRepository;
@@ -30,8 +34,9 @@ public class SensorValueService {
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
     }
 
-    public void saveOrUpdate(SensorValue sensorValue) {
-        sensorValueRepository.save(sensorValue);
+    public SensorValue saveOrUpdate(SensorValue sensorValue) {
+        plantWater(sensorValue.getSensor(), sensorValue.getValue());
+        return sensorValueRepository.save(sensorValue);
     }
 
     public void delete(Integer id) {
