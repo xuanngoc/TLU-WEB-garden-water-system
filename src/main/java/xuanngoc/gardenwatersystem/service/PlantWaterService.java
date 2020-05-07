@@ -5,17 +5,34 @@ import xuanngoc.gardenwatersystem.model.Sensor;
 
 public class PlantWaterService {
 
-    public static void plantWater(Sensor sensor, Double value) {
+    private static final String WORKING = "Hoạt động";
+    private static final String FIXING = "Đang sửa chữa";
+    private static final String BROKEN_DOWN = "Không hoạt động";
+
+    public static boolean plantWater(Sensor sensor, Double value) {
         Device device = sensor.getDevice();
         double minHumidity = device.getGarden().getPlant().getMinHumidity();
         double maxHumidity = device.getGarden().getPlant().getMaxHumidity();
 
         if (value < minHumidity) {
-            device.setState(true);
+            return true;
         } else if (value > maxHumidity) {
-            device.setState(false);
+            return false;
+        } else if (device.getStatus().equals(FIXING) || device.getStatus().equals(BROKEN_DOWN)) {
+            return false;
         }
+        return false;
     }
-    
 
+    public static boolean isDeviceWorking(Device device) {
+        return device.getStatus().equals(WORKING);
+    }
+
+    public static boolean isSensorWorking(Sensor sensor) {
+        return sensor.getStatus().equals(WORKING);
+    }
+
+/*    public static void setSensorForDevice(Device device, Sensor sensor) {
+        device.
+    }*/
 }

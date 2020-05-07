@@ -1,10 +1,14 @@
 package xuanngoc.gardenwatersystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Plant.class)
 public class Plant {
 
     @Id
@@ -15,7 +19,8 @@ public class Plant {
     private Integer version;
 
     @OneToMany(
-            cascade = CascadeType.REMOVE
+            mappedBy = "plant",
+            cascade = CascadeType.ALL
     )
     private List<Garden> gardens;
 
@@ -85,27 +90,25 @@ public class Plant {
         this.minTemperature = minTemperature;
     }
 
-/*    public double getMaxPh() {
-        return maxPh;
-    }
-
-    public void setMaxPh(double maxPh) {
-        this.maxPh = maxPh;
-    }
-
-    public double getMinPh() {
-        return minPh;
-    }
-
-    public void setMinPh(double minPh) {
-        this.minPh = minPh;
-    }*/
-
     public double getArea() {
         return area;
     }
 
     public void setArea(double area) {
         this.area = area;
+    }
+
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", maxHumidity=" + maxHumidity +
+                ", minHumidity=" + minHumidity +
+                ", maxTemperature=" + maxTemperature +
+                ", minTemperature=" + minTemperature +
+                ", area=" + area +
+                '}';
     }
 }

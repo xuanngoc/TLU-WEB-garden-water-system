@@ -1,8 +1,14 @@
 package xuanngoc.gardenwatersystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Sensor.class)
 public class Sensor {
 
     @Id
@@ -10,10 +16,17 @@ public class Sensor {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "sensor_type_id")
     private SensorType sensorType;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Device device;
+
+    @OneToMany(
+            mappedBy = "sensor",
+            cascade = CascadeType.REMOVE
+    )
+    private List<SensorValue> sensorValue;
 
     private String name;
     private String status;
@@ -65,5 +78,18 @@ public class Sensor {
 
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "id=" + id +
+                ", sensorType=" + sensorType.getId() +
+                ", device=" + device.getId() +
+                ", sensorValue=" + sensorValue +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", state=" + state +
+                '}';
     }
 }

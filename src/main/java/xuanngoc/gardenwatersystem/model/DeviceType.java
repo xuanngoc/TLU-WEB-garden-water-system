@@ -1,10 +1,14 @@
 package xuanngoc.gardenwatersystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id", scope=DeviceType.class)
 public class DeviceType {
 
     @Id
@@ -14,7 +18,8 @@ public class DeviceType {
     private String name;
 
     @OneToMany(
-            cascade = CascadeType.REMOVE
+            mappedBy = "deviceType",
+            cascade = CascadeType.ALL
     )
     private List<Device> devices;
 
