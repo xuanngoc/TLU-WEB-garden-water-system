@@ -1,18 +1,25 @@
 package xuanngoc.gardenwatersystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id", scope=Device.class)
 public class Device {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @JoinColumn(name = "device_type_id")
     private DeviceType deviceType;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @JoinColumn(name = "garden_id")
     private Garden garden;
 
     @OneToOne(cascade = CascadeType.REMOVE)

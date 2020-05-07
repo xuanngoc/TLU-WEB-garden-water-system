@@ -1,9 +1,14 @@
 package xuanngoc.gardenwatersystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 import javax.persistence.*;
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id", scope=Garden.class)
 public class Garden {
 
     @Id
@@ -13,10 +18,14 @@ public class Garden {
     @Version
     private Integer version;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @JoinColumn(name = "plant_id")
     private Plant plant;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(
+            mappedBy = "garden",
+            cascade = CascadeType.ALL
+    )
     private List<Device> devices;
 
     private String name;

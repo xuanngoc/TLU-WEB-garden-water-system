@@ -1,24 +1,31 @@
 package xuanngoc.gardenwatersystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Sensor.class)
 public class Sensor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @JoinColumn(name = "sensor_type_id")
     private SensorType sensorType;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
     private Device device;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-
+    @OneToMany(
+            mappedBy = "sensor",
+            cascade = CascadeType.REMOVE
+    )
     private List<SensorValue> sensorValue;
 
     private String name;
