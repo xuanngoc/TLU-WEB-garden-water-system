@@ -24,11 +24,15 @@ public class PlantWaterService {
         return false;
     }
 
-    public static boolean checkStatusDevice(Device device) {
-        return !(device.getStatus().equals(FIXING) || device.getStatus().equals(BROKEN_DOWN));
+    public static boolean isDeviceWorking(Device device) {
+        return device.getStatus().equals(WORKING);
     }
 
     public static boolean isSensorWorking(Sensor sensor) {
         return sensor.getStatus().equals(WORKING);
     }
+
+/*    public static void setSensorForDevice(Device device, Sensor sensor) {
+        device.
+    }*/
 }

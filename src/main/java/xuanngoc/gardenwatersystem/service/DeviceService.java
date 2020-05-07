@@ -20,12 +20,15 @@ public class DeviceService {
     }
 
     public List<Device> findAllDevices() {
-        List<Device> devices =  deviceRepository.findAll(Sort.by("id").ascending());
-        devices.forEach(device -> {
-            boolean statusDevice = PlantWaterService.checkStatusDevice(device);
-            device.setState(statusDevice);
+        deviceRepository.findAll().forEach(device -> {
+            boolean statusDevice = PlantWaterService.isDeviceWorking(device);
+            // If status is fixing or broken down -> turn off
+            if (!statusDevice) {
+                device.setState(false); // turn off
+                deviceRepository.save(device);
+            }
         });
-        return devices;
+        return deviceRepository.findAll(Sort.by("id").ascending());
     }
 
     public Device getById(Integer id) {

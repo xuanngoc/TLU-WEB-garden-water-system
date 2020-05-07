@@ -13,7 +13,7 @@ import xuanngoc.gardenwatersystem.service.SensorValueService;
 
 @RestController
 @RequestMapping("/api/sensor-value/")
-public class SensorValueController {
+public class RestSensorValueController {
 
     private SensorValueService sensorValueService;
     private SensorService sensorService;

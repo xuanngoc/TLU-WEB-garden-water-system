@@ -11,7 +11,7 @@ public class SensorType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<Sensor> sensors;
 
     private String name;

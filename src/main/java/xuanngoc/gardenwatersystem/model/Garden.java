@@ -13,10 +13,10 @@ public class Garden {
     @Version
     private Integer version;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Plant plant;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<Device> devices;
 
     private String name;

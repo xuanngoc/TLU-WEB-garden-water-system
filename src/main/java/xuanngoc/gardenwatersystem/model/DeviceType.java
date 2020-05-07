@@ -14,7 +14,7 @@ public class DeviceType {
     private String name;
 
     @OneToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.REMOVE
     )
     private List<Device> devices;
 

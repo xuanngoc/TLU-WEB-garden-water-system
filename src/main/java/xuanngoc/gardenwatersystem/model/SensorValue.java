@@ -13,7 +13,7 @@ public class SensorValue {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Sensor sensor;
 
     private Double value;

@@ -15,7 +15,7 @@ public class Plant {
     private Integer version;
 
     @OneToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.REMOVE
     )
     private List<Garden> gardens;
 
