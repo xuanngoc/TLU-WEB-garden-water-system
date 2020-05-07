@@ -3,7 +3,8 @@ package xuanngoc.gardenwatersystem.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xuanngoc.gardenwatersystem.model.Sensor;
 import xuanngoc.gardenwatersystem.model.SensorValue;
@@ -34,13 +35,14 @@ public class RestSensorValueController {
     }
 
     @PostMapping("/{id}/new")
-    private SensorValue newSensorValue(@PathVariable Integer id, @RequestBody SensorValue sensorValue) {
+    private ResponseEntity newSensorValue(@PathVariable Integer id, @RequestBody SensorValue sensorValue) {
         Sensor sensor = sensorService.getById(id);
         if (PlantWaterService.isSensorWorking(sensor)) {
             sensorValue.setSensor(sensor);
-            return sensorValueService.saveOrUpdate(sensorValue);
+            sensorValueService.saveOrUpdate(sensorValue);
+            return new ResponseEntity<SensorValue>(sensorValue, HttpStatus.OK);
         }
-        return null;
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
 }

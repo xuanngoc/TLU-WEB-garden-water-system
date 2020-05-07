@@ -15,7 +15,7 @@ public class Plant {
     private Integer version;
 
     @OneToMany(
-            cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
     )
     private List<Garden> gardens;
 
@@ -107,5 +107,19 @@ public class Plant {
 
     public void setArea(double area) {
         this.area = area;
+    }
+
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", maxHumidity=" + maxHumidity +
+                ", minHumidity=" + minHumidity +
+                ", maxTemperature=" + maxTemperature +
+                ", minTemperature=" + minTemperature +
+                ", area=" + area +
+                '}';
     }
 }

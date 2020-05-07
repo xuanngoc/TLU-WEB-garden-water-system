@@ -72,4 +72,17 @@ public class Sensor {
     public void setState(Boolean state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "id=" + id +
+                ", sensorType=" + sensorType.getId() +
+                ", device=" + device.getId() +
+                ", sensorValue=" + sensorValue +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }

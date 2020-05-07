@@ -61,4 +61,15 @@ public class Garden {
     public void setArea(String area) {
         this.area = area;
     }
+
+    @Override
+    public String toString() {
+        return "Garden{" +
+                "id=" + id +
+
+                ", plant=" + plant.getId() +
+                ", name='" + name + '\'' +
+                ", area='" + area + '\'' +
+                '}';
+    }
 }

@@ -77,4 +77,17 @@ public class Device {
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "id=" + id +
+                ", deviceType=" + deviceType.getId() +
+                ", garden=" + garden.getId() +
+                ", sensor=" + sensor +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }
