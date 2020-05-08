@@ -13,7 +13,6 @@
     <div>
         <form class="form-horizontal" th:object="${garden}" th:action="@{/garden}" method="post">
             <input type="hidden" th:field="*{id}"/>
-            <input type="hidden" th:field="*{version}"/>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="exampleFormControlSelect1">Chọn loài cây trồng</label>
                 <select class="form-control col-sm-10" id="exampleFormControlSelect1" th:field="*{plant}">
