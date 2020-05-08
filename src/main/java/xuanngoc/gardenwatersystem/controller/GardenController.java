@@ -29,13 +29,13 @@ public class GardenController {
 
     @RequestMapping("garden/list")
     public String listGardens(Model model) {
-        model.addAttribute("gardens", gardenService.findAllGardens());
+        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
         return "garden/list";
     }
 
     @RequestMapping("garden/list/{plantId}")
     public String listGardens(@PathVariable Integer plantId, Model model) {
-        model.addAttribute("gardens", gardenService.findAllGardens(plantId));
+        model.addAttribute("gardens", gardenService.findAllGardensByPlantId(plantId));
         return "garden/list";
     }
 

@@ -22,9 +22,6 @@ public class Device {
     @JoinColumn(name = "garden_id")
     private Garden garden;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private Sensor sensor;
-
     private String name;
     private String status;
     private Boolean state;
@@ -77,24 +74,5 @@ public class Device {
         this.state = state;
     }
 
-    public Sensor getSensor() {
-        return sensor;
-    }
 
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
-    @Override
-    public String toString() {
-        return "Device{" +
-                "id=" + id +
-                ", deviceType=" + deviceType.getId() +
-                ", garden=" + garden.getId() +
-                ", sensor=" + sensor +
-                ", name='" + name + '\'' +
-                ", status='" + status + '\'' +
-                ", state=" + state +
-                '}';
-    }
 }

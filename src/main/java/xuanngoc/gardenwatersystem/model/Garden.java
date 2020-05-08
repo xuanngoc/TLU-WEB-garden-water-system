@@ -15,8 +15,8 @@ public class Garden {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Version
-    private Integer version;
+    private String name;
+    private String area;
 
     @ManyToOne
     @JoinColumn(name = "plant_id")
@@ -28,8 +28,12 @@ public class Garden {
     )
     private List<Device> devices;
 
-    private String name;
-    private String area;
+    @OneToMany(
+            mappedBy = "garden",
+            cascade = CascadeType.ALL
+    )
+    private List<Sensor> sensors;
+
 
     public Integer getId() {
         return id;
@@ -37,14 +41,6 @@ public class Garden {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public Plant getPlant() {
@@ -69,6 +65,22 @@ public class Garden {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
+    }
+
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<Sensor> sensors) {
+        this.sensors = sensors;
     }
 
     @Override

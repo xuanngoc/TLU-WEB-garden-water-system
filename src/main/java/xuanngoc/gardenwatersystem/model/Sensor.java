@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -19,12 +20,13 @@ public class Sensor {
     @JoinColumn(name = "sensor_type_id")
     private SensorType sensorType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Device device;
+    @ManyToOne
+    @JoinColumn(name = "garden_id")
+    private Garden garden;
 
     @OneToMany(
             mappedBy = "sensor",
-            cascade = CascadeType.REMOVE
+            cascade = CascadeType.ALL
     )
     private List<SensorValue> sensorValue;
 
@@ -48,12 +50,12 @@ public class Sensor {
         this.sensorType = sensorType;
     }
 
-    public Device getDevice() {
-        return device;
+    public Garden getGarden() {
+        return garden;
     }
 
-    public void setDevice(Device device) {
-        this.device = device;
+    public void setGarden(Garden garden) {
+        this.garden = garden;
     }
 
     public String getName() {
@@ -80,16 +82,4 @@ public class Sensor {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-        return "Sensor{" +
-                "id=" + id +
-                ", sensorType=" + sensorType.getId() +
-                ", device=" + device.getId() +
-                ", sensorValue=" + sensorValue +
-                ", name='" + name + '\'' +
-                ", status='" + status + '\'' +
-                ", state=" + state +
-                '}';
-    }
 }

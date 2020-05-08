@@ -29,7 +29,7 @@ public class SensorService {
         this.deviceRepository = deviceRepository;
     }
 
-    public List<Sensor> findAllSensors() {
+    public List<Sensor> findAllSensorsBySensorId() {
         sensorRepository.findAll().forEach(sensor -> {
             boolean isWorking = PlantWaterService.isSensorWorking(sensor);
             // If sensor is fixing or broken down -> turn off
@@ -38,11 +38,10 @@ public class SensorService {
                 sensorRepository.save(sensor);
             }
         });
-
         return sensorRepository.findAll(Sort.by("id").ascending());
     }
 
-    public List<Sensor> findAllSensors(Integer sensorTypeId) {
+    public List<Sensor> findAllSensorsBySensorId(Integer sensorTypeId) {
         return sensorRepository.findBySensorTypeId(sensorTypeId);
     }
 
@@ -55,9 +54,6 @@ public class SensorService {
         boolean statusSensor = PlantWaterService.isSensorWorking(sensor);
         sensor.setState(statusSensor);
         sensorRepository.save(sensor);
-        Device device = deviceRepository.findById(sensor.getDevice().getId()).orElse(null);
-        device.setSensor(sensor);
-        deviceRepository.save(device);
     }
 
     public void delete(Integer id) {

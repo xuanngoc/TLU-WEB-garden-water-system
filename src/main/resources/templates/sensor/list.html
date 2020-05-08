@@ -18,7 +18,7 @@
                 <!--<th>Id</th>-->
                 <th>Tên cảm biến</th>
                 <th>Loại loại cảm biến</th>
-                <th>Thiết bị</th>
+                <th>Khu vườn</th>
                 <th>Tình trạng</th>
                 <th>Đang bật</th>
                 <th>Sửa</th>
@@ -29,7 +29,7 @@
                 <!--<td th:text="${garden.id}"></td>-->
                 <td th:text="${sensor.name}"></td>
                 <td th:text="${sensor.sensorType.name}"></td>
-                <td th:text="${sensor.device.name}"></td>
+                <td th:text="${sensor.garden?.name}"></td>
                 <td th:text="${sensor.status}"></td>
                 <td th:text="${sensor.state}"></td>
 

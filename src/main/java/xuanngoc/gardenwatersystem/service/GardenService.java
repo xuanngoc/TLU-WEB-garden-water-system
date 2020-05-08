@@ -16,11 +16,11 @@ public class GardenService {
     @Autowired
     private GardenRepository gardenRepository;
 
-    public List<Garden> findAllGardens() {
-        return gardenRepository.findAll(Sort.by(Sort.Direction.ASC, "Id"));
+    public List<Garden> findAllGardensByPlantId() {
+        return gardenRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
-    public List<Garden> findAllGardens(Integer id) {
+    public List<Garden> findAllGardensByPlantId(Integer id) {
         return gardenRepository.findByPlantId(id);
     }
 
