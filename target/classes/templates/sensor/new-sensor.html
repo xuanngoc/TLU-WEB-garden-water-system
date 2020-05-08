@@ -26,9 +26,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="garden">Thiết bị</label>
-                <select class="form-control col-sm-10" id="garden" th:field="*{device}">
-                    <option th:each="device : ${devices}" th:value="${device.id}" th:if="${device.sensor == null}" th:text="${device.name}">
+                <label class="col-sm-2 control-label" for="garden">Khu vườn</label>
+                <select class="form-control col-sm-10" id="garden" th:field="*{garden}">
+                    <option th:each="garden : ${gardens}" th:value="${garden.id}" th:text="${garden.name}">
                     </option>
                 </select>
             </div>

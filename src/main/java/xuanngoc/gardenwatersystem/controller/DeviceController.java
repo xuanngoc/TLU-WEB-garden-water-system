@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import xuanngoc.gardenwatersystem.model.Device;
-import xuanngoc.gardenwatersystem.model.Garden;
 import xuanngoc.gardenwatersystem.service.DeviceService;
 import xuanngoc.gardenwatersystem.service.DeviceTypeService;
 import xuanngoc.gardenwatersystem.service.GardenService;
@@ -44,7 +43,7 @@ public class DeviceController {
     public String newDevice(Model model) {
         model.addAttribute("device", new Device());
         model.addAttribute("deviceTypes", deviceTypeService.findAllDeviceTypes());
-        model.addAttribute("gardens", gardenService.findAllGardens());
+        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
         return "device/new-device";
     }
 
@@ -52,7 +51,7 @@ public class DeviceController {
     public String editDevice(@PathVariable Integer id,  Model model) {
         model.addAttribute("device", deviceService.getById(id));
         model.addAttribute("deviceTypes", deviceTypeService.findAllDeviceTypes());
-        model.addAttribute("gardens", gardenService.findAllGardens());
+        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
         return "device/edit-device";
     }
 

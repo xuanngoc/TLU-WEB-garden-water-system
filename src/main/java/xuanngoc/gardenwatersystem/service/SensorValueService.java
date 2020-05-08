@@ -4,7 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import xuanngoc.gardenwatersystem.model.Garden;
 import xuanngoc.gardenwatersystem.model.SensorValue;
+import xuanngoc.gardenwatersystem.repository.DeviceRepository;
 import xuanngoc.gardenwatersystem.repository.SensorValueRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,10 +16,16 @@ import javax.persistence.EntityNotFoundException;
 public class SensorValueService {
 
     private SensorValueRepository sensorValueRepository;
+    private DeviceRepository deviceRepository;
 
     @Autowired
     public void setSensorValueRepository(SensorValueRepository sensorValueRepository) {
         this.sensorValueRepository = sensorValueRepository;
+    }
+
+    @Autowired
+    public void setDeviceRepository(DeviceRepository deviceRepository) {
+        this.deviceRepository = deviceRepository;
     }
 
     public List<SensorValue> findAllSensorValues() {
@@ -34,8 +42,11 @@ public class SensorValueService {
     }
 
     public SensorValue saveOrUpdate(SensorValue sensorValue) {
-        boolean stateDevice = PlantWaterService.plantWater(sensorValue.getSensor(), sensorValue.getValue());
-        sensorValue.getSensor().getDevice().setState(stateDevice);
+        Garden garden = sensorValue.getSensor().getGarden();
+        boolean stateDevice = PlantWaterService.plantWater(sensorValue.getValue(), garden.getPlant());
+        deviceRepository.findAllByGardenId(garden.getId()).forEach(device -> {
+            device.setState(stateDevice);
+        });
         return sensorValueRepository.save(sensorValue);
     }
 

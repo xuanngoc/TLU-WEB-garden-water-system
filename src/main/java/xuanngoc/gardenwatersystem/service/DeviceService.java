@@ -31,6 +31,10 @@ public class DeviceService {
         return deviceRepository.findAll(Sort.by("id").ascending());
     }
 
+    public List<Device> findAllDevices(Integer gardenId) {
+        return deviceRepository.findAllByGardenId(gardenId);
+    }
+
     public Device getById(Integer id) {
         return deviceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));

@@ -15,9 +15,6 @@ public class Plant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Version
-    private Integer version;
-
     @OneToMany(
             mappedBy = "plant",
             cascade = CascadeType.ALL
@@ -42,13 +39,6 @@ public class Plant {
         return id;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public String getName() {
         return name;
@@ -98,17 +88,4 @@ public class Plant {
         this.area = area;
     }
 
-    @Override
-    public String toString() {
-        return "Plant{" +
-                "id=" + id +
-                ", version=" + version +
-                ", name='" + name + '\'' +
-                ", maxHumidity=" + maxHumidity +
-                ", minHumidity=" + minHumidity +
-                ", maxTemperature=" + maxTemperature +
-                ", minTemperature=" + minTemperature +
-                ", area=" + area +
-                '}';
-    }
 }
