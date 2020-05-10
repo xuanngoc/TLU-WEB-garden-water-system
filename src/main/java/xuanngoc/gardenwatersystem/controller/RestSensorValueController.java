@@ -1,6 +1,7 @@
 package xuanngoc.gardenwatersystem.controller;
 
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,12 @@ public class RestSensorValueController {
             return new ResponseEntity<SensorValue>(sensorValue, HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping("/date/{sensorId}")
+    private List<Date> listDateTimes(@PathVariable Integer sensorId) {
+
+        return sensorValueService.findDatesBySensorId(sensorId);
     }
 
 }

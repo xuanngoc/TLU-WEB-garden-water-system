@@ -27,7 +27,7 @@
                 <!--<td th:text="${garden.id}"></td>-->
                 <td th:text="${device.name}"></td>
                 <td th:text="${device.deviceType.name}"></td>
-                <td th:text="${device.garden.name}"></td>
+                <td th:text="${device.garden?.name}"></td>
                 <td th:text="${device.status}"></td>
                 <td th:text="${device.state}"></td>
                 <td><a th:href="${'/device/edit/' + device.id}">Edit</a></td>

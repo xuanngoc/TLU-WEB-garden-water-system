@@ -1,6 +1,7 @@
 package xuanngoc.gardenwatersystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class Sensor {
     @JoinColumn(name = "sensor_type_id")
     private SensorType sensorType;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "garden_id")
     private Garden garden;

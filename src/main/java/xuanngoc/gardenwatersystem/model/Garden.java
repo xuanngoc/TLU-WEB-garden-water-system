@@ -1,6 +1,7 @@
 package xuanngoc.gardenwatersystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
@@ -83,14 +84,4 @@ public class Garden {
         this.sensors = sensors;
     }
 
-    @Override
-    public String toString() {
-        return "Garden{" +
-                "id=" + id +
-
-                ", plant=" + plant.getId() +
-                ", name='" + name + '\'' +
-                ", area='" + area + '\'' +
-                '}';
-    }
 }

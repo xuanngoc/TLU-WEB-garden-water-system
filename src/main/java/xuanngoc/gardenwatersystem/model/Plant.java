@@ -26,8 +26,7 @@ public class Plant {
     private double minHumidity;
     private double maxTemperature;
     private double minTemperature;
-    /*private double maxPh;
-    private double minPh;*/
+
     private double area;
 
 

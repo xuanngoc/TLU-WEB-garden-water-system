@@ -41,6 +41,9 @@ public class DeviceService {
     }
 
     public Device saveOrUpdate(Device device) {
+        if (device.getState() == null) {
+            device.setState(false);
+        }
         return deviceRepository.save(device);
     }
 

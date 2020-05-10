@@ -2,10 +2,7 @@ package xuanngoc.gardenwatersystem.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xuanngoc.gardenwatersystem.model.Device;
 import xuanngoc.gardenwatersystem.service.DeviceService;
 
@@ -23,6 +20,14 @@ public class RestDeviceController {
     @GetMapping("{id}")
     public Device getDevice(@PathVariable Integer id) {
         return deviceService.getById(id);
+    }
+
+    @PostMapping("update/state/{deviceId}")
+    public void updateState(@PathVariable Integer deviceId) {
+        Device device = deviceService.getById(deviceId);
+        device.setState(!device.getState());
+        deviceService.saveOrUpdate(device);
+        System.out.println("ok");
     }
 
 }
