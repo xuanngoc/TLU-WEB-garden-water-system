@@ -1,5 +1,6 @@
 package xuanngoc.gardenwatersystem.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -34,6 +35,10 @@ public class SensorValueService {
 
     public List<SensorValue> findAllSensorValues(Integer sensorId) {
         return sensorValueRepository.findSensorValueBySensorId(sensorId);
+    }
+
+    public List<Date> findDatesBySensorId(Integer id) {
+        return sensorValueRepository.findDatesBySensorId(id);
     }
 
     public SensorValue findById(Integer id) {

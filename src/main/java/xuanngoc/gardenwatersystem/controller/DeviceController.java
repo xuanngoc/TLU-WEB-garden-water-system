@@ -47,6 +47,16 @@ public class DeviceController {
         return "device/new-device";
     }
 
+/*    @RequestMapping("device/new/{gardenId}")
+    public String newDeviceWithGarden(@PathVariable Integer gardenId, Model model) {
+        Device device = new Device();
+        device.setGarden(gardenService.getById(gardenId));
+        model.addAttribute("device", device);
+        model.addAttribute("deviceTypes", deviceTypeService.findAllDeviceTypes());
+
+        return "device/new-device-with-garden";
+    }*/
+
     @RequestMapping("device/edit/{id}")
     public String editDevice(@PathVariable Integer id,  Model model) {
         model.addAttribute("device", deviceService.getById(id));
@@ -55,16 +65,30 @@ public class DeviceController {
         return "device/edit-device";
     }
 
+
+
     @RequestMapping(value = "device", method = RequestMethod.POST)
     public String saveOrUpdate(Device device) {
         deviceService.saveOrUpdate(device);
         return "redirect:/device/list";
     }
 
+    @RequestMapping(value = "save-device/{id}", method = RequestMethod.POST)
+    public String save(@PathVariable Integer id, Device device) {
+        deviceService.saveOrUpdate(device);
+        return "redirect:/garden/detail/" + id.toString();
+    }
+
     @RequestMapping("device/delete/{id}")
     public String delete(@PathVariable Integer id) {
         deviceService.delete(id);
         return "redirect:/device/list";
+    }
+
+    @RequestMapping("device/delete/{gardenId}/{deviceId}")
+    public String deleteFromGarden(@PathVariable Integer gardenId, @PathVariable Integer deviceId) {
+        deviceService.delete(deviceId);
+        return "redirect:/garden/detail/" + gardenId.toString();
     }
 
 

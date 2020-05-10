@@ -9,35 +9,21 @@
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>-->
 </head>
 <body>
-<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
-    <div th:if="${not #lists.isEmpty(gardens)}">
-        <h2 class="text-center">Danh sách các khu vườn 🌳</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Số thứ tự</th>
-                <!--<th>Id</th>-->
-                <th>Tên khu vườn</th>
-                <th>Loại cây trồng</th>
-                <th>Diện tích(m²)</th>
-                <th>Sửa</th>
-                <th>Xóa</th>
-            </tr>
-            <tr th:each="garden, itor : ${gardens}">
-                <td th:text="${itor.count}"></td>
-                <!--<td th:text="${garden.id}"></td>-->
-                <td th:text="${garden.name}"></td>
-                <td th:text="${garden.plant.name}"></td>
-                <td th:text="${garden.area}"></td>
-                <td><a th:href="${'/garden/edit/' + garden.id}">Edit</a></td>
-                <td><a th:href="${'/garden/delete/' + garden.id}">Delete</a></td>
-            </tr>
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-sm-3 btn bg-primary">
-            <a href="/garden/new" class="text-light">Thêm khu vườn mới</a>
+    <div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+        <div th:if="${not #lists.isEmpty(gardens)}">
+            <h2 class="text-center mt-4  mb-4">Danh sách các khu vườn</h2>
+            <div class="row">
+                <div th:each="garden : ${gardens}" class="col-sm-6 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center" style="background-color:#3ae374;">
+                            <h5 th:text="${garden.name}" class="card-title"></h5>
+                            <p th:text="${garden.plant.name}" class="card-text"></p>
+                            <a th:href="${'/garden/detail/' + garden.id}" class="btn btn-info">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
