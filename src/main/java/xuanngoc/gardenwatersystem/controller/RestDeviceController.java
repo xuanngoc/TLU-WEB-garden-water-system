@@ -27,7 +27,12 @@ public class RestDeviceController {
         Device device = deviceService.getById(deviceId);
         device.setState(!device.getState());
         deviceService.saveOrUpdate(device);
-        System.out.println("ok");
     }
+
+    @GetMapping("{id}/state")
+    public boolean getDeviceState(@PathVariable Integer id) {
+        return deviceService.getById(id).getState();
+    }
+
 
 }

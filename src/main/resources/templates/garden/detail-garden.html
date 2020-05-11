@@ -29,7 +29,7 @@
                     <th>Tên thiết bị</th>
                     <th>Loại thiết bị</th>
                     <th>Tình trạng</th>
-                    <th>Đang bật</th>
+                    <th>On/Off</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </tr>
@@ -38,9 +38,17 @@
                     <td th:text="${device.name}"></td>
                     <td th:text="${device.deviceType.name}"></td>
                     <td th:text="${device.status}"></td>
-                    <td >
-                        <label class="switch">
-                            <input type="checkbox" id="toggle-btn-device" th:onclick="|toggle(${device.state}, ${device.id}) |">
+                    <td th:switch="${device.status}">
+                        <label th:case="${'Hoạt động'}" class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
+                            <span class="slider round"></span>
+                        </label>
+                        <!--<label th:case="Hoạt động" class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
+                            <span class="slider round"></span>
+                        </label>-->
+                        <label th:case="*" class="switch" >
+                            <input disabled type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" >
                             <span class="slider round"></span>
                         </label>
                     </td>
@@ -74,9 +82,13 @@
                     <td th:text="${sensor.name}"></td>
                     <td th:text="${sensor.sensorType.name}"></td>
                     <td th:text="${sensor.status}"></td>
-                    <td >
-                        <label class="switch">
-                            <input type="checkbox" id="toggle-btn" th:onclick="'toggle(' + ${sensor.state} + ') '">
+                    <td th:switch="${device.status}">
+                        <label th:case='${"Hoạt động"}' class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |" th:checked="${sensor.state}">
+                            <span class="slider round"></span>
+                        </label>
+                        <label th:case='${"*"}' class="switch">
+                            <input disabled type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |">
                             <span class="slider round"></span>
                         </label>
                     </td>
@@ -86,6 +98,10 @@
             </table>
         </div>
     </div>
+
+    <hr>
+    <hr>
+    
     <canvas id="myChart" width="400" height="200"></canvas>
     <script type="text/javascript" th:src="@{/js/sensor-chart.js}"></script>
 
