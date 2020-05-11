@@ -38,6 +38,10 @@ const myChart = new Chart(ctx, {
                     beginAtZero: true
                 }
             }]
-        }
+        },
+         title: {
+                    display: true,
+                    text: 'BIỂU ĐỒ ĐƯỜNG THỂ HIỆN ĐỘ ẨM VÀ NHIỆT ĐỌ CỬA VƯỜN'
+                }
     }
 });

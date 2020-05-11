@@ -51,8 +51,6 @@ public class SensorService {
     }
 
     public void saveOrUpdate(Sensor sensor) {
-        boolean statusSensor = PlantWaterService.isSensorWorking(sensor);
-        sensor.setState(statusSensor);
         sensorRepository.save(sensor);
     }
 
