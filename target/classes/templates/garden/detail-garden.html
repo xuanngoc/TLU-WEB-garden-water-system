@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title th:text="${garden.name}"></title>
+
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../css/layout.css" th:href="@{/css/detail-garden.css}" />
+    <script type="text/javascript" th:src="@{/js/detail-garden.js}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
+    <div>
+        <h2 th:text="${'Chi tiết ' + garden.name}" class="text-center mt-4  mb-4"></h2>
+
+        <div>
+            <h4 class="text-left ml-10"> 🍀 Danh sách các thiết bị thuộc khu vườn</h4>
+            <div class="col-sm-3 btn bg-primary float-right mb-3">
+                <a th:href="${'/garden/' + garden.id + '/new-device'}" class="text-light">Thêm thiết bị</a>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Số thứ tự</th>
+                    <!--<th>Id</th>-->
+                    <th>Tên thiết bị</th>
+                    <th>Loại thiết bị</th>
+                    <th>Tình trạng</th>
+                    <th>On/Off</th>
+                    <th>Sửa</th>
+                    <th>Xóa</th>
+                </tr>
+                <tr th:each="device, itor : ${garden.devices}">
+                    <td th:text="${itor.count}"></td>
+                    <td th:text="${device.name}"></td>
+                    <td th:text="${device.deviceType.name}"></td>
+                    <td th:text="${device.status}"></td>
+                    <td th:switch="${device.status}">
+                        <label th:case="${'Hoạt động'}" class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
+                            <span class="slider round"></span>
+                        </label>
+                        <!--<label th:case="Hoạt động" class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
+                            <span class="slider round"></span>
+                        </label>-->
+                        <label th:case="*" class="switch" >
+                            <input disabled type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" >
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td><a th:href="${'/garden/' + garden.id + '/device/update/' + device.id}">Edit</a></td>
+                    <td><a th:href="${'/garden/' + garden.id + '/device/delete/' + device.id}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <hr class="mt-10 mb-20">
+        <hr class="mt-10 mb-20">
+
+        <div>
+            <h4 class="text-left ml-10"> 🍀 Danh sách các cảm biến thuộc khu vườn</h4>
+            <div class="col-sm-3 btn bg-primary float-right mb-3">
+                <a th:href="${'/garden/' + garden.id + '/sensor/new'}" class="text-light">Thêm sensor</a>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Số thứ tự</th>
+                    <!--<th>Id</th>-->
+                    <th>Tên cảm biến</th>
+                    <th>Loại cảm biến</th>
+                    <th>Tình trạng</th>
+                    <th>Bật / Tắt</th>
+                    <th>Sửa</th>
+                    <th>Xóa</th>
+                </tr>
+                <tr th:each="sensor, itor : ${garden.sensors}">
+                    <td th:text="${itor.count}"></td>
+                    <td th:text="${sensor.name}"></td>
+                    <td th:text="${sensor.sensorType.name}"></td>
+                    <td th:text="${sensor.status}"></td>
+                    <td th:switch="${device.status}">
+                        <label th:case='${"Hoạt động"}' class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |" th:checked="${sensor.state}">
+                            <span class="slider round"></span>
+                        </label>
+                        <label th:case='${"*"}' class="switch">
+                            <input disabled type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td><a th:href="${'/garden/' + garden.id + '/sensor/update/' + sensor.id}">Edit</a></td>
+                    <td><a th:href="${'/garden/' + garden.id + '/sensor/delete' + sensor.id}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+    <hr>
+    
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script type="text/javascript" th:src="@{/js/sensor-chart.js}"></script>
+
+</div>
+</body>
+</html>
