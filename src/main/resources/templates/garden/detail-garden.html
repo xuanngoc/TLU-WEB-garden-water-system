@@ -82,7 +82,7 @@
                     <td th:text="${sensor.name}"></td>
                     <td th:text="${sensor.sensorType.name}"></td>
                     <td th:text="${sensor.status}"></td>
-                    <td th:switch="${device.status}">
+                    <td th:switch="${sensor.status}">
                         <label th:case='${"Hoạt động"}' class="switch">
                             <input type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |" th:checked="${sensor.state}">
                             <span class="slider round"></span>
