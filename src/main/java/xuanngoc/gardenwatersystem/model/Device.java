@@ -25,6 +25,7 @@ public class Device {
     private String name;
     private String status;
     private Boolean state;
+    private Boolean isManual;
 
     public Integer getId() {
         return id;
@@ -74,5 +75,11 @@ public class Device {
         this.state = state;
     }
 
+    public Boolean getManual() {
+        return isManual;
+    }
 
+    public void setManual(Boolean manual) {
+        isManual = manual;
+    }
 }

@@ -12,6 +12,7 @@
     <div layout:fragment="content" th:remove="tag" class="container" id="layoutSidenav_content">
         <div th:if="${not #lists.isEmpty(gardens)}">
             <h2 class="text-center mt-4  mb-4">Danh sách các khu vườn</h2>
+
             <div class="row">
                 <div th:each="garden : ${gardens}" class="col-sm-6 mb-4">
                     <div class="card">
@@ -23,6 +24,10 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div>
+            <a class="btn btn-primary" th:href="${'/garden/new'}">Thêm mới vườn</a>
         </div>
     </div>
 </body>

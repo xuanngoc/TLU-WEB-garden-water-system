@@ -93,6 +93,9 @@ public class GardenController {
     public String newDeviceFromGarden(@PathVariable Integer gardenId, Model model) {
         Device device = new Device();
         device.setGarden(gardenService.getById(gardenId));
+
+        // Set manual is false by default. It's mean devices are working automatic.
+        device.setManual(false);
         model.addAttribute("device", device);
         model.addAttribute("deviceTypes", deviceTypeService.findAllDeviceTypes());
         return "device/new-device-from-garden";
