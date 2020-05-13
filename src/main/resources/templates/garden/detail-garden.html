@@ -20,7 +20,7 @@
         <div>
             <h4 class="text-left ml-10"> 🍀 Danh sách các thiết bị thuộc khu vườn</h4>
             <div class="col-sm-3 btn bg-primary float-right mb-3">
-                <a th:href="${'/garden/' + garden.id + '/new-device'}" class="text-light">Thêm thiết bị</a>
+                <a th:href="${'/garden/' + garden.id + '/device/new'}" class="text-light">Thêm thiết bị</a>
             </div>
             <table class="table table-striped">
                 <tr>
@@ -37,9 +37,13 @@
                     <td th:text="${itor.count}"></td>
                     <td th:text="${device.name}"></td>
                     <td th:text="${device.deviceType.name}"></td>
-                    <td th:text="${device.status}"></td>
-                    <td th:switch="${device.status}">
-                        <label th:case="${'Hoạt động'}" class="switch">
+                    <td th:text="${device.status}" th:id="'status-device-' + ${device.id}"></td>
+                    <td th:switch="${device.status}" >
+                        <label th:case="${'Hoạt động tự động'}" class="switch">
+                            <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
+                            <span class="slider round"></span>
+                        </label>
+                        <label th:case="${'Hoạt động thủ công'}" class="switch">
                             <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
                             <span class="slider round"></span>
                         </label>

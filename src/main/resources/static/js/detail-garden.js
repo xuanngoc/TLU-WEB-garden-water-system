@@ -4,6 +4,8 @@ function toggle(state, deviceId) {
     var xhttp = new XMLHttpRequest();
      xhttp.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
+             //document.getElementById('status-device-' + deviceId).innerHTML ;
+             getStatus(deviceId);
              console.log("device's state was changed");
          }
      };
@@ -20,5 +22,19 @@ function toggleSensor(state, sensorId) {
         }
     };
     xhttp.open("POST", "/api/sensor/update/state/" + sensorId, true);
+    xhttp.send();
+}
+
+function getStatus(deviceId) {
+    let url = '/api/device/' + deviceId + '/status';
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+             console.log(xhttp.response);
+             document.getElementById('status-device-' + deviceId).innerHTML  = xhttp.response;
+        }
+    };
+    xhttp.open("GET", url, true);
     xhttp.send();
 }

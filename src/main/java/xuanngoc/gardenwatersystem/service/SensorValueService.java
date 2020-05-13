@@ -48,9 +48,18 @@ public class SensorValueService {
 
     public SensorValue saveOrUpdate(SensorValue sensorValue) {
         Garden garden = sensorValue.getSensor().getGarden();
-        boolean stateDevice = PlantWaterService.plantWater(sensorValue.getValue(), garden.getPlant());
+//        sensorValue.getSensor().getSensorType()
+        int stateDevice = PlantWaterService.plantWater(sensorValue.getValue(), garden.getPlant());
         deviceRepository.findAllByGardenId(garden.getId()).forEach(device -> {
-            device.setState(stateDevice);
+            if (device.getStatus().equals(PlantWaterService.WORKING_AUTO)){
+                if (stateDevice == 1) {
+                    device.setState(true);
+                } else if(stateDevice == 0) {
+                    device.setState(false);
+                }
+                // else state = currentState
+
+            }
         });
         return sensorValueRepository.save(sensorValue);
     }

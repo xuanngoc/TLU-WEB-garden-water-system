@@ -7,38 +7,26 @@ import xuanngoc.gardenwatersystem.model.SensorValue;
 
 public class PlantWaterService {
 
-    private static final String WORKING = "Hoạt động";
-    private static final String FIXING = "Đang sửa chữa";
-    private static final String BROKEN_DOWN = "Không hoạt động";
+    public static final String WORKING_AUTO = "Hoạt động tự động";
+    public static final String WORKING_MANUAL = "Hoạt động thủ công";
+    public static final String FIXING = "Đang sửa chữa";
+    public static final String BROKEN_DOWN = "Không hoạt động";
+    public static final String WORKING = "Hoạt động";
 
-    /*public static boolean plantWater(Sensor sensor, Double value) {
-        Device device = sensor.getDevice();
-        double minHumidity = device.getGarden().getPlant().getMinHumidity();
-        double maxHumidity = device.getGarden().getPlant().getMaxHumidity();
-
-        if (value < minHumidity) {
-            return true;
-        } else if (value > maxHumidity) {
-            return false;
-        } else if (device.getStatus().equals(FIXING) || device.getStatus().equals(BROKEN_DOWN)) {
-            return false;
-        }
-        return false;
-    }*/
-
-    public static boolean plantWater(double sensorValue, Plant plant) {
+    public static int plantWater(double sensorValue, Plant plant) {
         double minHumidity = plant.getMinHumidity();
         double maxHumidity = plant.getMaxHumidity();
+
         if (sensorValue < minHumidity) {
-            return true;
+            return 1; // state = turn on
         } else if (sensorValue > maxHumidity) {
-            return false;
+            return 0; // state = turn off
         }
-        return false;
+        return 2; // state = currentState
     }
 
     public static boolean isDeviceWorking(Device device) {
-        return device.getStatus().equals(WORKING);
+        return device.getStatus().equals(WORKING_AUTO);
     }
 
     public static boolean isSensorWorking(Sensor sensor) {
