@@ -32,6 +32,10 @@ public class SensorTypeService {
                 .orElseThrow(() -> new EntityNotFoundException(id.toString()));
     }
 
+    public SensorType findByName(String name) {
+        return sensorTypeRepository.findByName(name);
+    }
+
     public void saveOrUpdate(SensorType sensorType) {
         sensorTypeRepository.save(sensorType);
     }

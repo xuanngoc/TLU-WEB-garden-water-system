@@ -38,3 +38,21 @@ function getStatus(deviceId) {
     xhttp.open("GET", url, true);
     xhttp.send();
 }
+
+function plantWater() {
+    const gardenId = window.location.href.split('/').pop();
+
+    let url = '/api/plant-water/' + gardenId;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+             console.log(xhttp.response);
+             console.log("ok");
+        }
+    };
+    xhttp.open("PUT", url, true);
+    xhttp.send();
+}
+
+setInterval(plantWater(), 10000);

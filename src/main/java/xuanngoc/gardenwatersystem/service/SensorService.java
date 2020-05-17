@@ -30,14 +30,6 @@ public class SensorService {
     }
 
     public List<Sensor> findAllSensorsBySensorId() {
-        sensorRepository.findAll().forEach(sensor -> {
-            boolean isWorking = PlantWaterService.isSensorWorking(sensor);
-            // If sensor is fixing or broken down -> turn off
-            if (!isWorking) {
-                sensor.setState(false); //turn off
-                sensorRepository.save(sensor);
-            }
-        });
         return sensorRepository.findAll(Sort.by("id").ascending());
     }
 
@@ -51,6 +43,12 @@ public class SensorService {
     }
 
     public void saveOrUpdate(Sensor sensor) {
+        if (sensor.getStatus().equals(PlantWaterService.WORKING)) {
+            sensor.setState(true);
+        } else {
+            sensor.setState(false);
+        }
+
         sensorRepository.save(sensor);
     }
 

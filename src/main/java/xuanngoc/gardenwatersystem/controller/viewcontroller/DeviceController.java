@@ -1,4 +1,4 @@
-package xuanngoc.gardenwatersystem.controller;
+package xuanngoc.gardenwatersystem.controller.viewcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
