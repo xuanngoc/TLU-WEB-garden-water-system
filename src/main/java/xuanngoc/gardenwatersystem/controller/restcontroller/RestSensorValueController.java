@@ -1,4 +1,4 @@
-package xuanngoc.gardenwatersystem.controller;
+package xuanngoc.gardenwatersystem.controller.restcontroller;
 
 
 import java.util.Date;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xuanngoc.gardenwatersystem.model.Sensor;
 import xuanngoc.gardenwatersystem.model.SensorValue;
+import xuanngoc.gardenwatersystem.model.SensorValueCustom;
 import xuanngoc.gardenwatersystem.service.PlantWaterService;
 import xuanngoc.gardenwatersystem.service.SensorService;
 import xuanngoc.gardenwatersystem.service.SensorValueService;
@@ -46,10 +47,14 @@ public class RestSensorValueController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping("/date/{sensorId}")
-    private List<Date> listDateTimes(@PathVariable Integer sensorId) {
+    @RequestMapping("/humility/{gardenId}")
+    private List<SensorValueCustom> listSensorHumilityValue(@PathVariable Integer gardenId) {
+        return sensorValueService.findAvgSensorHumilityValueByGardenId(gardenId);
+    }
 
-        return sensorValueService.findDatesBySensorId(sensorId);
+    @RequestMapping("/temperature/{gardenId}")
+    private List<SensorValueCustom> listSensorTemperatureValue(@PathVariable Integer gardenId) {
+        return sensorValueService.findAvgSensorTemperatureValueByGardenId(gardenId);
     }
 
 }

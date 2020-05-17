@@ -1,4 +1,4 @@
-package xuanngoc.gardenwatersystem.controller;
+package xuanngoc.gardenwatersystem.controller.restcontroller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

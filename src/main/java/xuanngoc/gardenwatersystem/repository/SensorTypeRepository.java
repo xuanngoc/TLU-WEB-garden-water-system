@@ -9,4 +9,5 @@ import javax.persistence.Entity;
 @Repository
 public interface SensorTypeRepository  extends JpaRepository<SensorType, Integer> {
 
+    public SensorType findByName(String name);
 }
