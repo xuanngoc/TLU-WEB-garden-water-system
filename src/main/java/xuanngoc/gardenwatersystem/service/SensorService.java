@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import xuanngoc.gardenwatersystem.model.Device;
 import xuanngoc.gardenwatersystem.model.Sensor;
+import xuanngoc.gardenwatersystem.model.SensorProperties;
 import xuanngoc.gardenwatersystem.repository.DeviceRepository;
 import xuanngoc.gardenwatersystem.repository.SensorRepository;
 
@@ -35,6 +36,10 @@ public class SensorService {
 
     public List<Sensor> findAllSensorsBySensorId(Integer sensorTypeId) {
         return sensorRepository.findBySensorTypeId(sensorTypeId);
+    }
+
+    public List<SensorProperties> findAll() {
+        return sensorRepository.getSensors();
     }
 
     public Sensor getById(Integer id) {

@@ -2,12 +2,12 @@ package xuanngoc.gardenwatersystem.controller.restcontroller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xuanngoc.gardenwatersystem.model.Sensor;
+import xuanngoc.gardenwatersystem.model.SensorProperties;
 import xuanngoc.gardenwatersystem.service.SensorService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/sensor/")
@@ -18,6 +18,11 @@ public class RestSensorController {
     @Autowired
     public void setSensorService(SensorService sensorService) {
         this.sensorService = sensorService;
+    }
+
+    @GetMapping("/list")
+    public List<SensorProperties> sensorList() {
+        return sensorService.findAll();
     }
 
     @PostMapping("update/state/{id}")

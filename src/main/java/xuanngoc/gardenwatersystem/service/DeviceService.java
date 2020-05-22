@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import xuanngoc.gardenwatersystem.model.Device;
+import xuanngoc.gardenwatersystem.model.DeviceProperties;
 import xuanngoc.gardenwatersystem.repository.DeviceRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,15 +21,11 @@ public class DeviceService {
     }
 
     public List<Device> findAllDevices() {
-        /*deviceRepository.findAll().forEach(device -> {
-            boolean statusDevice = PlantWaterService.isDeviceWorking(device);
-            // If status is fixing or broken down -> turn off
-            if (!statusDevice) {
-                device.setState(false); // turn off
-                deviceRepository.save(device);
-            }
-        });*/
         return deviceRepository.findAll(Sort.by("id").ascending());
+    }
+
+    public List<DeviceProperties> findAll() {
+        return deviceRepository.getDevices();
     }
 
     public List<Device> findAllDevices(Integer gardenId) {
