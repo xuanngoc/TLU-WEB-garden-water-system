@@ -43,7 +43,7 @@ public class DeviceController {
     public String newDevice(Model model) {
         model.addAttribute("device", new Device());
         model.addAttribute("deviceTypes", deviceTypeService.findAllDeviceTypes());
-        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
+        model.addAttribute("gardens", gardenService.findAllGardens());
         return "device/new-device";
     }
 
@@ -61,7 +61,7 @@ public class DeviceController {
     public String editDevice(@PathVariable Integer id,  Model model) {
         model.addAttribute("device", deviceService.getById(id));
         model.addAttribute("deviceTypes", deviceTypeService.findAllDeviceTypes());
-        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
+        model.addAttribute("gardens", gardenService.findAllGardens());
         return "device/edit-device";
     }
 

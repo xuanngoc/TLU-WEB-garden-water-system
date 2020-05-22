@@ -4,8 +4,11 @@ package xuanngoc.gardenwatersystem.controller.restcontroller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xuanngoc.gardenwatersystem.model.Device;
+import xuanngoc.gardenwatersystem.model.DeviceProperties;
 import xuanngoc.gardenwatersystem.service.DeviceService;
 import xuanngoc.gardenwatersystem.service.PlantWaterService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/device/")
@@ -16,6 +19,10 @@ public class RestDeviceController {
     @Autowired
     public void setDeviceService(DeviceService deviceService) {
         this.deviceService = deviceService;
+    }
+
+    public List<DeviceProperties> deviceList() {
+        return deviceService.findAll();
     }
 
     @GetMapping("{id}")

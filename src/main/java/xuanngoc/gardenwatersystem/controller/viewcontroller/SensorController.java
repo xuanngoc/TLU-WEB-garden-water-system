@@ -50,7 +50,7 @@ public class SensorController {
     public String newSensor(Model model) {
         model.addAttribute("sensor", new Sensor());
         model.addAttribute("sensorTypes", sensorTypeService.findAllSensorTypes());
-        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
+        model.addAttribute("gardens", gardenService.findAllGardens());
         return "sensor/new-sensor";
     }
 
@@ -58,7 +58,7 @@ public class SensorController {
     public String editSensor(@PathVariable Integer id,  Model model) {
         model.addAttribute("sensor", sensorService.getById(id));
         model.addAttribute("sensorTypes", sensorTypeService.findAllSensorTypes());
-        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
+        model.addAttribute("gardens", gardenService.findAllGardens());
         return "sensor/edit-sensor";
     }
 

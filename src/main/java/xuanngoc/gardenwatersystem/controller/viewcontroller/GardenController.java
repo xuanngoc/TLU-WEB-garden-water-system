@@ -58,7 +58,7 @@ public class GardenController {
 
     @RequestMapping("garden/list")
     public String listGardens(Model model) {
-        model.addAttribute("gardens", gardenService.findAllGardensByPlantId());
+        model.addAttribute("gardens", gardenService.findAllGardens());
         return "garden/list";
     }
 
