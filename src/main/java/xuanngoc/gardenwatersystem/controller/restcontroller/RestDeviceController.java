@@ -21,6 +21,7 @@ public class RestDeviceController {
         this.deviceService = deviceService;
     }
 
+    @RequestMapping("list")
     public List<DeviceProperties> deviceList() {
         return deviceService.findAll();
     }
