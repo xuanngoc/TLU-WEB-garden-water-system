@@ -1,79 +1,107 @@
-const ctx = document.getElementById('myChart').getContext('2d');
-const xLabels = [];
-const yHumility = [];
-const yTemperature = [];
-const yHumility1 = [];
-const yTemperature1 = [];
+let xLabelsHumility = [];
+let xLabelsTemperature = [];
+
+let yHumility = [];
+let yTemperature = [];
+
+let humility = new Map();
+let temperature = new Map();
 
 
-function getDataHumility(gardenId) {
-    fetch('/api/sensor-value/humility/' + gardenId)
+async function getDataHumility(gardenId) {
+    return fetch('/api/sensor-value/humility/' + gardenId)
         .then((resp) => {
                 return resp.json();
              })// Transform the data into json
         .then(function(data) {
+            //const humility = new Map();
             data.forEach(obj => {
                 yHumility.push(obj.avg);
-                const d = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute).toLocaleString();
-                xLabels.push(d);
+                const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute).toLocaleString();
+                xLabelsHumility.push(date);
+                humility.set(obj.avg, date);
             });
-        })
+            return humility;
+        });
 }
 
-function getDataTemperature(gardenId) {
-    fetch('/api/sensor-value/temperature/' + gardenId)
+async function getDataTemperature(gardenId) {
+    return fetch('/api/sensor-value/temperature/' + gardenId)
         .then((resp) => {
                 return resp.json();
-             })// Transform the data into json
+             })
         .then(function(data) {
+            //const temperature = new Map();
             data.forEach(obj => {
                 yTemperature.push(obj.avg);
+                const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute).toLocaleString();
+                xLabelsTemperature.push(date);
+                temperature.set(obj.avg, date);
             });
-        })
+            return temperature;
+        });
 }
-const gardenId = window.location.href.split('/').pop();
-getDataHumility(gardenId);
-getDataTemperature(gardenId);
 
-const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: xLabels,
-        datasets: [{
-            label: 'Nhiệt độ',
-            data: yTemperature,
-            backgroundColor: [
-                'rgba(0 , 99, 7, 0)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 7, 1)',
-            ],
-            borderWidth: 1
-        },
-        {
-            label: 'Độ ẩm',
-            data: yHumility,
-            backgroundColor: [
-                'rgba(0, 233, 9, 0)',
-            ],
-            borderColor: [
-                'rgba(0, 233, 9, 1)',
-            ],
-            borderWidth: 1
+async function getXLabelMaxLength(gardenId) {
+    humility = await getDataHumility(gardenId);
+    temperature = await getDataTemperature(gardenId);
+
+    //console.log(humility);
+    return humility.size > temperature.size ? [...humility.values()] : [...temperature.values()];
+}
+
+const gardenId = window.location.href.split('/').pop();
+//getDataTemperature(gardenId);
+//getDataHumility(gardenId);
+
+const xLabels = []
+let xPromise = getXLabelMaxLength(gardenId); // now is Promise
+xPromise = Promise.resolve(xPromise);
+xPromise.then(value => {
+    xLabels.push(value)
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xLabels[0],
+            datasets: [{
+                label: 'Nhiệt độ',
+                data: [...temperature.keys()],
+                backgroundColor: [
+                    'rgba(0 , 99, 7, 0)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 7, 1)',
+                ],
+                borderWidth: 1
             },
-        ]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+            {
+                label: 'Độ ẩm',
+                data: [...humility.keys()],
+                backgroundColor: [
+                    'rgba(0, 233, 9, 0)',
+                ],
+                borderColor: [
+                    'rgba(0, 233, 9, 1)',
+                ],
+                borderWidth: 1
+                },
+            ]
         },
-         title: {
-                    display: true,
-                    text: 'BIỂU ĐỒ ĐƯỜNG THỂ HIỆN ĐỘ ẨM VÀ NHIỆT ĐỌ CỬA VƯỜN'
-                }
-    }
+        options: {
+            events: ['click'],
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'BIỂU ĐỒ ĐƯỜNG THỂ HIỆN ĐỘ ẨM VÀ NHIỆT ĐỌ CỬA VƯỜN'
+            }
+        }
+    });
+
 });
