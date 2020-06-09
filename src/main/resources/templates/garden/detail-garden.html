@@ -49,10 +49,6 @@
                             <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
                             <span class="slider round"></span>
                         </label>
-                        <!--<label th:case="Hoạt động" class="switch">
-                            <input type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" th:checked="${device.state}">
-                            <span class="slider round"></span>
-                        </label>-->
                         <label th:case="*" class="switch" >
                             <input disabled type="checkbox" th:id="'toggle-btn-device-' + ${device.id}" th:onclick="|toggle(${device.state}, ${device.id}) |" >
                             <span class="slider round"></span>
@@ -93,7 +89,7 @@
                             <input type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |" th:checked="${sensor.state}">
                             <span class="slider round"></span>
                         </label>
-                        <label th:case='${"*"}' class="switch">
+                        <label th:case='*' class="switch">
                             <input disabled type="checkbox" th:id="'toggle-btn-sensor-' + ${sensor.id}" th:onclick="|toggleSensor(${sensor.state}, ${sensor.id}) |">
                             <span class="slider round"></span>
                         </label>
