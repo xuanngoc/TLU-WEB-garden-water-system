@@ -142,7 +142,7 @@ public class GardenController {
 
     @RequestMapping("garden/{gardenId}/sensor/delete/{sensorId}")
     public String deleteSenorFromGarden(@PathVariable Integer gardenId, @PathVariable Integer sensorId) {
-        deviceService.delete(sensorId);
+        sensorService.delete(sensorId);
         return "redirect:/garden/detail/" + gardenId.toString();
     }
 
