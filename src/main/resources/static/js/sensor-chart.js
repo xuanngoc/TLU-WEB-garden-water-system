@@ -18,8 +18,8 @@ async function getDataHumility(gardenId) {
             data.forEach(obj => {
                 yHumility.push(obj.avg);
                 const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
-                xLabelsHumility.push(date);
-                humility.set(obj.avg, date);
+                xLabelsHumility.push(date.toLocaleString());
+                humility.set(obj.avg, date.toLocaleString());
             });
             return humility;
         });
@@ -35,10 +35,10 @@ async function getDataTemperature(gardenId) {
             data.forEach(obj => {
                 yTemperature.push(obj.avg);
                 const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
-                console.log(date);
                 //console.log(date);
-                xLabelsTemperature.push(date);
-                temperature.set(obj.avg, date);
+                //console.log(date);
+                xLabelsTemperature.push(date.toLocaleString());
+                temperature.set(obj.avg, date.toLocaleString());
             });
             return temperature;
         });
