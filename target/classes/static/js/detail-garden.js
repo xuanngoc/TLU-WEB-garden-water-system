@@ -18,7 +18,7 @@ function toggleSensor(state, sensorId) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-             //console.log("sensor's state was changed");
+             console.log("sensor's state was changed");
         }
     };
     xhttp.open("POST", "/api/sensor/update/state/" + sensorId, true);

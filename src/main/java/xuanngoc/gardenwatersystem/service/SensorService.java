@@ -50,7 +50,13 @@ public class SensorService {
     public void saveOrUpdate(Sensor sensor) {
         if (!sensor.getStatus().equals(PlantWaterService.WORKING)) {
             sensor.setState(false);
+        } else {
+            sensor.setState(true);
         }
+        sensorRepository.save(sensor);
+    }
+
+    public void updateState(Sensor sensor) {
         sensorRepository.save(sensor);
     }
 

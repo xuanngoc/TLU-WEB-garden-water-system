@@ -29,7 +29,7 @@ public class RestSensorController {
     public void updateState(@PathVariable Integer id) {
         Sensor sensor = sensorService.getById(id);
         sensor.setState(!sensor.getState());
-        sensorService.saveOrUpdate(sensor);
+        sensorService.updateState(sensor);
     }
 
 
