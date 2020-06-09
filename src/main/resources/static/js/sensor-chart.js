@@ -35,6 +35,8 @@ async function getDataTemperature(gardenId) {
             data.forEach(obj => {
                 yTemperature.push(obj.avg);
                 const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute).toLocaleString();
+                console.log("hour: " + obj.hour);
+                console.log("minute" + obj.minute);
                 xLabelsTemperature.push(date);
                 temperature.set(obj.avg, date);
             });
