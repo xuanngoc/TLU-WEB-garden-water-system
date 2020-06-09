@@ -17,8 +17,8 @@ async function getDataHumility(gardenId) {
             //const humility = new Map();
             data.forEach(obj => {
                 yHumility.push(obj.avg);
-                const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute).toLocaleString();
-                xLabelsHumility.push(obj);
+                const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
+                xLabelsHumility.push(date);
                 humility.set(obj.avg, date);
             });
             return humility;
@@ -34,10 +34,10 @@ async function getDataTemperature(gardenId) {
             //const temperature = new Map();
             data.forEach(obj => {
                 yTemperature.push(obj.avg);
-                const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute).toLocaleString();
+                const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
                 console.log(obj);
                 //console.log(date);
-                xLabelsTemperature.push(obj);
+                xLabelsTemperature.push(date);
                 temperature.set(obj.avg, date);
             });
             return temperature;
