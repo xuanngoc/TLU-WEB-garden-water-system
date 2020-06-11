@@ -36,7 +36,7 @@ async function getDataTemperature(gardenId) {
                 //yTemperature.push(obj.avg);
                 const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
                 //console.log(date);
-                console.log(date.toGMTString());
+                console.log(date);
                 //xLabelsTemperature.push(date);
                 temperature.set(obj.avg, date.toGMTString());
             });
