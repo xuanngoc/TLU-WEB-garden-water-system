@@ -19,7 +19,7 @@ async function getDataHumility(gardenId) {
                 //yHumility.push(obj.avg);
                 const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
                 //xLabelsHumility.push(date);
-                humility.set(obj.avg, date);
+                humility.set(obj.avg, date.toLocaleString());
             });
             return humility;
         });
@@ -36,9 +36,9 @@ async function getDataTemperature(gardenId) {
                 //yTemperature.push(obj.avg);
                 const date = new Date(obj.year, obj.month - 1, obj.day, obj.hour , obj.minute);
                 //console.log(date);
-                console.log(date);
+                console.log(date.toLocaleString());
                 //xLabelsTemperature.push(date);
-                temperature.set(obj.avg, date);
+                temperature.set(obj.avg, date.toLocaleString());
             });
             return temperature;
         });
